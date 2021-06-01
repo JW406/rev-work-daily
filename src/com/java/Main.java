@@ -1,5 +1,7 @@
 package com.java;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 class Car {
@@ -34,7 +36,7 @@ class Car {
 
 public class Main {
   public static void main(String[] args) {
-    t10("foobar 123");
+    t09(4, 15);
   }
 
   private static void t01() {
@@ -119,6 +121,20 @@ public class Main {
   }
 
   private static void t09(int a, int b) {
+    List<Integer> res = new ArrayList<>();
+    for (int k = a; k <= b; ++k) {
+      boolean flag = true;
+      for (int i = 2; i < k - 1; ++i) {
+        if (k % i == 0) {
+          flag = false;
+          break;
+        }
+      }
+      if (flag) {
+        res.add(k);
+      }
+    }
+    System.out.println(res);
   }
 
   private static int t10(int n, int p) {
@@ -128,7 +144,7 @@ public class Main {
     return n * t10(n, p - 1);
   }
 
-  private static void t10(String str) {
+  private static void t11(String str) {
     int vowels = 0, consonant = 0, digits = 0, spaces = 0;
     for (char c : str.toCharArray()) {
       if (c == ' ') {
