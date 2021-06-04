@@ -1,7 +1,12 @@
 package day04;
 
 import java.lang.Thread.State;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class TestJoin extends Thread {
   @Override
@@ -74,18 +79,55 @@ class AccHolder implements Runnable {
   }
 }
 
+interface Shape {
+  void draw();
+}
+
+class Foo {
+  public void Bar() {
+    System.out.println("drawing.....");
+  }
+}
+
 public class ClassSessionSnippet {
   public static void main(String[] args) throws InterruptedException {
     // useThreadJoin();
     // useThreadJoin_v2();
-    TestBank();
+    // TestBank();
     // nativeLogger();
+    // testStream();
+    // testStream02();
+    // testStream03();
+
+    Shape s = new Foo()::Bar;
+    s.draw();
   }
 
   private static final Logger logger = Logger.getLogger(ClassSessionSnippet.class.getName());
 
   private static void nativeLogger() {
     logger.info("foo bar");
+  }
+
+  private static void testStream() {
+    // Stream.iterate(0, (n) -> n + 1).limit(10).forEach((x) -> System.out.println(x));
+    Stream.iterate(0, (n) -> n + 1).limit(10).forEach(System.out::println);
+  }
+
+  private static void testStream02() {
+    List<String> memberNames = new ArrayList<>();
+    memberNames.add("Alex");
+    memberNames.add("Sams");
+    memberNames.stream().filter((s) -> s.startsWith("A")).map(String::toUpperCase).forEach(System.out::println);
+  }
+
+  private static void testStream03() {
+    List<Integer> list1 = Arrays.asList(1, 2, 3);
+    List<Integer> list2 = Arrays.asList(4, 5, 6);
+    List<Integer> list3 = Arrays.asList(7, 8, 9);
+    List<List<Integer>> mat = Arrays.asList(list1, list2, list3);
+    List<Integer> flat = mat.stream().flatMap((x) -> x.stream()).collect(Collectors.toList());
+    System.out.println(flat);
   }
 
   private static void TestBank() {
