@@ -13,6 +13,13 @@ public class Employee {
     this.address = address;
   }
 
+  public Employee(Employee em) {
+    this.empNo = em.empNo;
+    this.empName = em.empName;
+    this.salary = em.salary;
+    this.address = em.address;
+  }
+
   public int getEmpNo() {
     return empNo;
   }
