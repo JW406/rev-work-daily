@@ -49,4 +49,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   public void deleteEmployee(Employee e1) {
     emps.remove(e1);
   }
+
+  @Override
+  public void addEmployee(Employee e1) {
+    EmployeeServiceImpl.emps.add(e1);
+  }
 }
