@@ -24,7 +24,7 @@ public class UserEmployee {
       System.out.println("5. Delete an Employee");
       System.out.println("6. Quit");
       try {
-        switch (g.sc.nextInt()) {
+        switch (g.getNextInt()) {
         case 1: // List all employee
           svc.displayAllEmployees();
           break;
