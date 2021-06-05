@@ -1,14 +1,21 @@
 package day04.EmployeeManagement.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import day04.EmployeeManagement.models.Address;
 import day04.EmployeeManagement.models.Employee;
 
 public class EmployeeServiceImpl implements EmployeeService {
-  private List<Employee> emps;
+  private static List<Employee> emps = new ArrayList<Employee>() {
+    {
+      add(new Employee(1, "Lisa", 15000.0, new Address("Los Angeles", "California")));
+      add(new Employee(2, "Lucy", 14000.0, new Address("San Francisco", "California")));
+      add(new Employee(3, "Tom", 13000.0, new Address("Seattle", "Washington")));
+    }
+  };
 
-  public EmployeeServiceImpl(List<Employee> emps) {
-    this.emps = emps;
+  public EmployeeServiceImpl() {
   }
 
   @Override

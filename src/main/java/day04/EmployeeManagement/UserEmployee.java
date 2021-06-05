@@ -1,12 +1,9 @@
 package day04.EmployeeManagement;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import day04.EmployeeManagement.models.Address;
 import day04.EmployeeManagement.models.Employee;
 import day04.EmployeeManagement.services.EmployeeService;
 import day04.EmployeeManagement.services.EmployeeServiceImpl;
@@ -16,11 +13,7 @@ public class UserEmployee {
   private static final Logger logger = Logger.getLogger(UserEmployee.class.getName());
 
   public static void main(String[] args) {
-    List<Employee> emps = new ArrayList<>();
-    emps.add(new Employee(1, "Lisa", 15000.0, new Address("Los Angeles", "California")));
-    emps.add(new Employee(2, "Lucy", 14000.0, new Address("San Francisco", "California")));
-    emps.add(new Employee(3, "Tom", 13000.0, new Address("Seattle", "Washington")));
-    EmployeeService svc = new EmployeeServiceImpl(emps);
+    EmployeeService svc = new EmployeeServiceImpl();
 
     boolean flag = true;
     while (flag) {
