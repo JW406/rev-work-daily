@@ -12,8 +12,10 @@ public class g {
     while (true) {
       try {
         res = sc.nextInt();
+        sc.nextLine();
         break;
       } catch (InputMismatchException e) {
+        sc.nextLine();
         System.out.println("Invalid input, please enter a valid number");
       } catch (NoSuchElementException e) {
         Exit();

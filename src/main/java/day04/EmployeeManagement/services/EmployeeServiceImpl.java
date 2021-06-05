@@ -2,6 +2,7 @@ package day04.EmployeeManagement.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import day04.EmployeeManagement.models.Address;
 import day04.EmployeeManagement.models.Employee;
@@ -30,17 +31,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public Employee findByEmployeeNo(int empNo) {
-    return emps.stream().filter(e -> e.getEmpNo() == empNo).findFirst().orElse(null);
+    return emps.stream().filter(e -> e.getEmpNo().equals(empNo)).findFirst().orElse(null);
   }
 
   @Override
-  public boolean updateEmployee(Employee e1) {
-    // TODO Auto-generated method stub
-    return false;
+  public void updateEmployee(Employee e1) {
+    emps = emps.stream().map((e) -> {
+      if (e.getEmpNo().equals(e1.getEmpNo())) {
+        return e1;
+      } else {
+        return e;
+      }
+    }).collect(Collectors.toList());
   }
 
   @Override
-  public boolean deleteEmployee(Employee e1) {
-    return emps.remove(e1);
+  public void deleteEmployee(Employee e1) {
+    emps.remove(e1);
   }
 }

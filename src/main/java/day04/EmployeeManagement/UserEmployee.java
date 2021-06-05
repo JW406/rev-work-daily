@@ -25,10 +25,10 @@ public class UserEmployee {
       System.out.println("6. Quit");
       try {
         switch (g.sc.nextInt()) {
-        case 1:
+        case 1: // List all employee
           svc.displayAllEmployees();
           break;
-        case 2: {
+        case 2: { // Display Yearly Salary
           System.out.println("== Display Yearly Salary ==");
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
@@ -40,7 +40,7 @@ public class UserEmployee {
           System.out.println(svc.calculateYearlySalary(e1));
           break;
         }
-        case 3: {
+        case 3: { // Specific Employee Detail
           System.out.println("== Specific Employee Detail ==");
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
@@ -52,7 +52,7 @@ public class UserEmployee {
           System.out.println(e1);
           break;
         }
-        case 4: {
+        case 4: { // Modify Employee Detail
           System.out.println("== Modify Employee Detail ==");
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
@@ -62,14 +62,39 @@ public class UserEmployee {
             continue;
           }
           Employee modifiedEmp = new Employee(e1);
-          if (svc.updateEmployee(modifiedEmp)) {
-            System.out.println("\nUpdate " + e1.getEmpName() + "(" + id + ") successful\n");
-          } else {
-            System.out.println("\nFailed to update employee with id " + id + "\n");
+          String str;
+          double num;
+
+          System.out.println("Enter new name (" + modifiedEmp.getEmpName() + ")");
+          str = g.sc.nextLine();
+          if (!str.isEmpty()) {
+            modifiedEmp.setEmpName(str);
           }
+
+          System.out.println("Enter new salary (" + modifiedEmp.getSalary() + ")");
+          str = g.sc.nextLine();
+          if (!str.isEmpty()) {
+            num = Double.parseDouble(str);
+            modifiedEmp.setSalary(num);
+          }
+
+          System.out.println("Enter new Address(State) (" + modifiedEmp.getAddress().getState() + ")");
+          str = g.sc.nextLine();
+          if (!str.isEmpty()) {
+            modifiedEmp.getAddress().setState(str);
+          }
+
+          System.out.println("Enter new Address(City) (" + modifiedEmp.getAddress().getCity() + ")");
+          str = g.sc.nextLine();
+          if (!str.isEmpty()) {
+            modifiedEmp.getAddress().setCity(str);
+          }
+
+          svc.updateEmployee(modifiedEmp);
+          System.out.println("\nUpdate " + modifiedEmp.getEmpName() + "(" + id + ") successful\n");
           break;
         }
-        case 5: {
+        case 5: { // Delete an Employee
           System.out.println("== Delete an Employee ==");
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
@@ -78,11 +103,8 @@ public class UserEmployee {
             logger.log(Level.INFO, "Unable to find the employee");
             continue;
           }
-          if (svc.deleteEmployee(e1)) {
-            System.out.println("\nDelete " + e1.getEmpName() + "(" + id + ") successful\n");
-          } else {
-            System.out.println("\nFailed to delete employee with id " + id + "\n");
-          }
+          svc.deleteEmployee(e1);
+          System.out.println("\nDelete " + e1.getEmpName() + "(" + id + ") successful\n");
           break;
         }
         case 6:
