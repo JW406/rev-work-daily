@@ -47,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public void deleteEmployee(Employee e1) {
-    emps.remove(e1);
+    emps = emps.stream().filter((e) -> !e.getEmpNo().equals(e1.getEmpNo())).collect(Collectors.toList());
   }
 
   @Override
