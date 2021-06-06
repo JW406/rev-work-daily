@@ -17,12 +17,14 @@ public class UserEmployee {
 
     boolean flag = true;
     while (flag) {
+      System.out.println();
       System.out.println("1. List all employee");
       System.out.println("2. Display Yearly Salary");
       System.out.println("3. Display Specific Employee Detail");
       System.out.println("4. Modify Employee Detail");
       System.out.println("5. Delete an Employee");
       System.out.println("6. Quit");
+      System.out.println();
       try {
         switch (g.getNextInt()) {
         case 1: // List all employee
