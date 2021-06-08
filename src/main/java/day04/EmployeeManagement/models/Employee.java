@@ -1,39 +1,19 @@
 package day04.EmployeeManagement.models;
 
-public class Employee {
-  private Integer empNo;
-  private String empName;
+public class Employee extends Person {
   private Double salary;
   private Address address;
 
   public Employee(Integer empNo, String empName, Double salary, Address address) {
-    this.empNo = empNo;
-    this.empName = empName;
+    super(empNo, empName);
     this.salary = salary;
     this.address = address;
   }
 
   public Employee(Employee em) {
-    this.empNo = em.empNo;
-    this.empName = em.empName;
+    super(em.getEmpNo(), em.getEmpName());
     this.salary = em.salary;
     this.address = em.address;
-  }
-
-  public Integer getEmpNo() {
-    return empNo;
-  }
-
-  public void setEmpNo(Integer empNo) {
-    this.empNo = empNo;
-  }
-
-  public String getEmpName() {
-    return empName;
-  }
-
-  public void setEmpName(String empName) {
-    this.empName = empName;
   }
 
   public Double getSalary() {
@@ -54,6 +34,8 @@ public class Employee {
 
   @Override
   public String toString() {
-    return "Employee [address=" + address + ", empName=" + empName + ", empNo=" + empNo + ", salary=" + salary + "]";
+    return "Employee [address=" + address + ", empName=" + getEmpName() + ", empNo=" + getEmpNo() + ", salary=" + salary
+        + "]";
   }
+
 }

@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import day04.EmployeeManagement.exceptions.EmployeeNotFound;
 import day04.EmployeeManagement.models.Employee;
 import day04.EmployeeManagement.services.EmployeeService;
 import day04.EmployeeManagement.services.EmployeeServiceImpl;
@@ -36,8 +37,7 @@ public class UserEmployee {
           int id = g.getNextInt();
           Employee e1 = svc.findByEmployeeNo(id);
           if (e1 == null) {
-            logger.log(Level.INFO, "Unable to find the employee");
-            continue;
+            throw new EmployeeNotFound();
           }
           System.out.println(svc.calculateYearlySalary(e1));
           break;
@@ -48,8 +48,7 @@ public class UserEmployee {
           int id = g.getNextInt();
           Employee e1 = svc.findByEmployeeNo(id);
           if (e1 == null) {
-            logger.log(Level.INFO, "Unable to find the employee");
-            continue;
+            throw new EmployeeNotFound();
           }
           System.out.println(e1);
           break;
@@ -60,8 +59,7 @@ public class UserEmployee {
           int id = g.getNextInt();
           Employee e1 = svc.findByEmployeeNo(id);
           if (e1 == null) {
-            logger.log(Level.INFO, "Unable to find the employee");
-            continue;
+            throw new EmployeeNotFound();
           }
           Employee modifiedEmp = new Employee(e1);
           String str;
@@ -102,8 +100,7 @@ public class UserEmployee {
           int id = g.getNextInt();
           Employee e1 = svc.findByEmployeeNo(id);
           if (e1 == null) {
-            logger.log(Level.INFO, "Unable to find the employee");
-            continue;
+            throw new EmployeeNotFound();
           }
           svc.deleteEmployee(e1);
           System.out.println("\nDelete " + e1.getEmpName() + "(" + id + ") successful\n");
@@ -116,6 +113,8 @@ public class UserEmployee {
         }
       } catch (NoSuchElementException e) {
         g.Exit();
+      } catch (EmployeeNotFound e) {
+        logger.log(Level.INFO, "Unable to find the employee");
       }
     }
   }
