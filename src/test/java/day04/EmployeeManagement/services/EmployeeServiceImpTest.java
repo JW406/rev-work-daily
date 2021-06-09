@@ -1,13 +1,16 @@
 package day04.EmployeeManagement.services;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import day04.EmployeeManagement.exceptions.EmployeeNotFound;
 import day04.EmployeeManagement.models.Address;
 import day04.EmployeeManagement.models.Employee;
 
@@ -24,7 +27,10 @@ public class EmployeeServiceImpTest {
 
   @AfterAll
   public static void tear() {
-    svc.deleteEmployee(svc.findByEmployeeNo(999));
+    try {
+      svc.deleteEmployee(svc.findByEmployeeNo(999));
+    } catch (Exception e) {
+    }
   }
 
   @Test
@@ -34,21 +40,37 @@ public class EmployeeServiceImpTest {
 
   @Test
   void testFindByEmployeeNo() {
-    assertEquals(emp, svc.findByEmployeeNo(999));
-    assertEquals(null, svc.findByEmployeeNo(9999));
+    assertDoesNotThrow(() -> {
+      assertEquals(emp, svc.findByEmployeeNo(999));
+    });
+    assertThrows(EmployeeNotFound.class, () -> {
+      svc.findByEmployeeNo(9999);
+    });
   }
 
-  @Test void testUpdateEmployee() {
+  @Test
+  void testUpdateEmployee() {
     svc.updateEmployee(new Employee(999, "Bart", 16666.60, null));
-    assertNotNull(svc.findByEmployeeNo(999));
-    assertEquals("Bart", svc.findByEmployeeNo(999).getEmpName());
+    assertDoesNotThrow(() -> {
+      svc.findByEmployeeNo(999);
+    });
+    assertDoesNotThrow(() -> {
+      assertEquals("Bart", svc.findByEmployeeNo(999).getEmpName());
+    });
   }
 
-  @Test void testAddRemoveEmployee() {
+  @Test
+  void testAddRemoveEmployee() {
     Employee tmp = new Employee(10000, "Lucy", 14999.0, new Address("Los Angeles", "California"));
     svc.addEmployee(tmp);
-    assertNotNull(svc.findByEmployeeNo(10000));
+    assertDoesNotThrow(() -> {
+      assertNotNull(svc.findByEmployeeNo(10000));
+    });
+
     svc.deleteEmployee(tmp);
-    assertNull(svc.findByEmployeeNo(10000));
+    assertThrows(EmployeeNotFound.class, () -> {
+      assertNull(svc.findByEmployeeNo(10000));
+    });
+
   }
 }

@@ -36,9 +36,6 @@ public class UserEmployee {
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
           Employee e1 = svc.findByEmployeeNo(id);
-          if (e1 == null) {
-            throw new EmployeeNotFound();
-          }
           System.out.println(svc.calculateYearlySalary(e1));
           break;
         }
@@ -47,9 +44,6 @@ public class UserEmployee {
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
           Employee e1 = svc.findByEmployeeNo(id);
-          if (e1 == null) {
-            throw new EmployeeNotFound();
-          }
           System.out.println(e1);
           break;
         }
@@ -58,9 +52,6 @@ public class UserEmployee {
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
           Employee e1 = svc.findByEmployeeNo(id);
-          if (e1 == null) {
-            throw new EmployeeNotFound();
-          }
           Employee modifiedEmp = new Employee(e1);
           String str;
           double num;
@@ -99,9 +90,6 @@ public class UserEmployee {
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
           Employee e1 = svc.findByEmployeeNo(id);
-          if (e1 == null) {
-            throw new EmployeeNotFound();
-          }
           svc.deleteEmployee(e1);
           System.out.println("\nDelete " + e1.getEmpName() + "(" + id + ") successful\n");
           break;

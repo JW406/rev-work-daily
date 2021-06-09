@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import day04.EmployeeManagement.exceptions.EmployeeNotFound;
 import day04.EmployeeManagement.models.Address;
 import day04.EmployeeManagement.models.Employee;
 
@@ -35,9 +36,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public Employee findByEmployeeNo(int empNo) {
+  public Employee findByEmployeeNo(int empNo) throws EmployeeNotFound {
     logger.info("Finding employee...");
-    return emps.stream().filter(e -> e.getEmpNo().equals(empNo)).findFirst().orElse(null);
+    return emps.stream().filter(e -> e.getEmpNo().equals(empNo)).findFirst().orElseThrow(() -> new EmployeeNotFound());
   }
 
   @Override
