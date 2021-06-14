@@ -13,10 +13,10 @@ public class Main {
     int choice = 0;
     do {
       System.out.println("Choose an Option");
-      System.out.println("1. List a deprtment");
-      System.out.println("2. Add a deprtment");
-      System.out.println("3. Update a deprtment");
-      System.out.println("4. Delete a deprtment");
+      System.out.println("1. List Deprtments");
+      System.out.println("2. Add a Deprtment");
+      System.out.println("3. Update a Deprtment");
+      System.out.println("4. Delete a Deprtment");
       System.out.println("5. Insert using StoredProcedure");
 
       choice = Integer.parseInt(g.sc.nextLine());
