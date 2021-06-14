@@ -17,7 +17,7 @@ import daoPatternExercise.models.Department;
 
 public class DepartmentDAOImpl implements DepartmentDAO {
   @Override
-  public List<Department> listDepartments() {
+  public List<Department> getAllDepartments() {
     String QUERY = "select deptno,dname,loc from dept_jdbc";
     List<Department> res = new ArrayList<>();
     try (Connection con = ConnectionUtil.getConnection();

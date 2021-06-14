@@ -48,7 +48,7 @@ public class Main {
           break;
         }
         case 2: {
-          departmentDAO.listDepartments().stream().forEach(System.out::println);
+          departmentDAO.getAllDepartments().stream().forEach(System.out::println);
           break;
         }
         case 3: {
