@@ -5,9 +5,19 @@ public class Department {
   private String dname;
   private String loc;
 
+  public Department() {
+  }
+
+  public Department(Integer deptno, String dname, String loc) {
+    this.deptno = deptno;
+    this.dname = dname;
+    this.loc = loc;
+  }
+
   public Integer getDeptno() {
     return deptno;
   }
+
   public void setDeptno(Integer deptno) {
     this.deptno = deptno;
   }
