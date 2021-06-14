@@ -10,4 +10,6 @@ public interface DepartmentDAO {
   Boolean addDepartment(Department dept);
   Boolean updateDepartment(Department dept);
   Boolean deleteDepartment(Integer deptNo);
+  Boolean addImageForDepartment(Integer deptNo, String fileName);
+  Boolean retrieveImageForDepartment(Integer deptNo, String fileName);
 }

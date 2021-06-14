@@ -1,5 +1,9 @@
 package daoPatternExercise.dao;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -102,5 +106,47 @@ public class DepartmentDAOImpl implements DepartmentDAO {
       System.out.println("Department cannot be found.");
     }
     return dept;
+  }
+
+  @Override
+  public Boolean addImageForDepartment(Integer deptNo, String fileName) {
+    String QUERY = "UPDATE dept_jdbc SET image=? WHERE deptno=?";
+    try (Connection conn = ConnectionUtil.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(QUERY);
+        FileInputStream fin = new FileInputStream(fileName)) {
+      stmt.setBinaryStream(1, fin, fin.available());
+      stmt.setInt(2, deptNo);
+      int rows = stmt.executeUpdate();
+      if (rows > 0) {
+        return true;
+      }
+    } catch (SQLException e) {
+      System.out.println("Image adding failed");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  @Override
+  public Boolean retrieveImageForDepartment(Integer deptNo, String fileName) {
+    String QUERY = "select image from dept_jdbc where deptno = ?";
+    try (Connection conn = ConnectionUtil.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(QUERY);
+        FileOutputStream fout = new FileOutputStream(fileName)) {
+      stmt.setInt(1, deptNo);
+      ResultSet rs = stmt.executeQuery();
+      if (rs.next()) {
+        Blob b = rs.getBlob(1);
+        byte image[] = b.getBytes(1, (int) b.length());
+        fout.write(image);
+        return true;
+      }
+    } catch (SQLException e) {
+      System.out.println("Image retrieval failed.");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return false;
   }
 }

@@ -1,0 +1,8 @@
+ALTER table dept_jdbc add (
+  image BLOB
+);
+
+ALTER table dept_jdbc
+  drop column image;
+
+select * from dept_jdbc;
