@@ -1,15 +1,15 @@
-package day04.EmployeeManagement.menuOptions;
+package EmployeeManagement.menuOptions;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import day04.EmployeeManagement.exceptions.EmployeeNotFound;
-import day04.EmployeeManagement.services.EmployeeService;
-import day04.EmployeeManagement.utils.g;
+import EmployeeManagement.exceptions.EmployeeNotFound;
+import EmployeeManagement.services.EmployeeService;
+import EmployeeManagement.utils.g;
 
 public interface Displayer {
   Logger logger = Logger.getLogger(Displayer.class.getName());
-  final public static String prefix = "day04.EmployeeManagement.menuOptions.displayers.";
+  final public static String prefix = "EmployeeManagement.menuOptions.displayers.";
 
   public static Displayer get(String str) {
     try {

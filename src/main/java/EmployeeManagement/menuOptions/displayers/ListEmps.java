@@ -1,11 +1,11 @@
-package day04.EmployeeManagement.menuOptions.displayers;
+package EmployeeManagement.menuOptions.displayers;
 
 import java.util.List;
 import java.util.logging.Level;
 
-import day04.EmployeeManagement.menuOptions.Displayer;
-import day04.EmployeeManagement.models.Employee;
-import day04.EmployeeManagement.services.EmployeeService;
+import EmployeeManagement.menuOptions.Displayer;
+import EmployeeManagement.models.Employee;
+import EmployeeManagement.services.EmployeeService;
 
 final public class ListEmps implements Displayer {
   private final static ListEmps instance = new ListEmps();

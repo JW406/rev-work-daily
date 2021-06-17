@@ -1,9 +1,9 @@
-package day04.EmployeeManagement.services;
+package EmployeeManagement.services;
 
 import java.util.List;
 
-import day04.EmployeeManagement.exceptions.EmployeeNotFound;
-import day04.EmployeeManagement.models.Employee;
+import EmployeeManagement.exceptions.EmployeeNotFound;
+import EmployeeManagement.models.Employee;
 
 public interface EmployeeService {
   List<Employee> getAllEmployees();

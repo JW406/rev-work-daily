@@ -1,12 +1,12 @@
-package day04.EmployeeManagement.menuOptions.displayers;
+package EmployeeManagement.menuOptions.displayers;
 
 import java.util.logging.Level;
 
-import day04.EmployeeManagement.exceptions.EmployeeNotFound;
-import day04.EmployeeManagement.menuOptions.Displayer;
-import day04.EmployeeManagement.models.Employee;
-import day04.EmployeeManagement.services.EmployeeService;
-import day04.EmployeeManagement.utils.g;
+import EmployeeManagement.exceptions.EmployeeNotFound;
+import EmployeeManagement.menuOptions.Displayer;
+import EmployeeManagement.models.Employee;
+import EmployeeManagement.services.EmployeeService;
+import EmployeeManagement.utils.g;
 
 final public class ModifyAnEmployee implements Displayer {
   private final static ModifyAnEmployee instance = new ModifyAnEmployee();

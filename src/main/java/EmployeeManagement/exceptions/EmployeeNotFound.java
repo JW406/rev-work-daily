@@ -1,4 +1,4 @@
-package day04.EmployeeManagement.exceptions;
+package EmployeeManagement.exceptions;
 
 public class EmployeeNotFound extends Exception {
   public EmployeeNotFound() {

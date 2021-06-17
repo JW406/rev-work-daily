@@ -1,10 +1,10 @@
-package day04.EmployeeManagement.menuOptions.displayers;
+package EmployeeManagement.menuOptions.displayers;
 
 import java.util.logging.Level;
 
-import day04.EmployeeManagement.menuOptions.Displayer;
-import day04.EmployeeManagement.services.EmployeeService;
-import day04.EmployeeManagement.utils.g;
+import EmployeeManagement.menuOptions.Displayer;
+import EmployeeManagement.services.EmployeeService;
+import EmployeeManagement.utils.g;
 
 final public class DeleteAnEmployee implements Displayer {
   private final static DeleteAnEmployee instance = new DeleteAnEmployee();

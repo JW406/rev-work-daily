@@ -1,4 +1,4 @@
-package day04.EmployeeManagement.services;
+package EmployeeManagement.services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import EmployeeManagement.exceptions.EmployeeNotFound;
+import EmployeeManagement.models.Address;
+import EmployeeManagement.models.Employee;
 import daoPatternExercise.ConnectionUtil;
-import day04.EmployeeManagement.exceptions.EmployeeNotFound;
-import day04.EmployeeManagement.models.Address;
-import day04.EmployeeManagement.models.Employee;
 
 public class EmployeeServiceImpl implements EmployeeService {
   private static final Logger logger = Logger.getLogger(EmployeeServiceImpl.class.getName());

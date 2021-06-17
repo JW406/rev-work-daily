@@ -1,4 +1,4 @@
-package day04.EmployeeManagement.services;
+package EmployeeManagement.services;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,9 +10,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import day04.EmployeeManagement.exceptions.EmployeeNotFound;
-import day04.EmployeeManagement.models.Address;
-import day04.EmployeeManagement.models.Employee;
+import EmployeeManagement.exceptions.EmployeeNotFound;
+import EmployeeManagement.models.Address;
+import EmployeeManagement.models.Employee;
 
 public class EmployeeServiceImpTest {
   private static EmployeeService svc = null;

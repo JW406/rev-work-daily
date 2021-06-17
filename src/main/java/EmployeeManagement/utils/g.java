@@ -1,4 +1,4 @@
-package day04.EmployeeManagement.utils;
+package EmployeeManagement.utils;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;

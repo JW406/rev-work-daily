@@ -1,4 +1,4 @@
-package day04.EmployeeManagement.models;
+package EmployeeManagement.models;
 
 public class Address {
   private String city;

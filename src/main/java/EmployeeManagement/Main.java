@@ -1,13 +1,13 @@
-package day04.EmployeeManagement;
+package EmployeeManagement;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import day04.EmployeeManagement.exceptions.EmployeeNotFound;
-import day04.EmployeeManagement.menuOptions.Displayer;
-import day04.EmployeeManagement.services.EmployeeService;
-import day04.EmployeeManagement.services.EmployeeServiceImpl;
-import day04.EmployeeManagement.utils.g;
+import EmployeeManagement.exceptions.EmployeeNotFound;
+import EmployeeManagement.menuOptions.Displayer;
+import EmployeeManagement.services.EmployeeService;
+import EmployeeManagement.services.EmployeeServiceImpl;
+import EmployeeManagement.utils.g;
 
 public class Main {
   private static final Logger logger = Logger.getLogger(Main.class.getName());

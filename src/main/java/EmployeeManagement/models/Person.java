@@ -1,4 +1,4 @@
-package day04.EmployeeManagement.models;
+package EmployeeManagement.models;
 
 public class Person {
   private Integer empNo;
