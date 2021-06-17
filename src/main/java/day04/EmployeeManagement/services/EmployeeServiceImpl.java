@@ -75,6 +75,9 @@ public class EmployeeServiceImpl implements EmployeeService {
       System.out.println("The employee cannot be found.");
       e.printStackTrace();
     }
+    if (emp == null) {
+      throw new EmployeeNotFound();
+    }
     return emp;
   }
 
@@ -139,10 +142,16 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public Boolean addEmployee(Employee emp) {
+  public Boolean addEmployee(Employee emp, Boolean isTest) {
     logger.info("Adding employee...");
     String QUERY = "insert into emp_proj_emp_tb values(?,?,?)";
-    String QUERY2 = "insert into emp_proj_addr_tb values(null,?,?,?)";
+    String QUERY2 = "insert into emp_proj_addr_tb values(";
+    if (isTest) {
+      QUERY2 += emp.getEmpNo();
+    } else {
+      QUERY2 += "null";
+    }
+    QUERY2 += ",?,?,?)";
     int result;
     try (Connection con = ConnectionUtil.getConnection();
         PreparedStatement stmt = con.prepareStatement(QUERY);
@@ -161,9 +170,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
       }
     } catch (SQLException e) {
-      System.out.println(">>:" + e.getErrorCode());
-      e.printStackTrace();
+      if (e.getErrorCode() == 1) {
+        logger.log(Level.INFO, "Sorry, the ID has been taken");
+      } else {
+        e.printStackTrace();
+      }
     }
     return false;
+
+  }
+
+  @Override
+  public Boolean addEmployee(Employee emp) {
+    return addEmployee(emp, false);
   }
 }

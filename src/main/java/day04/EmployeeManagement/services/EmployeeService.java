@@ -17,4 +17,6 @@ public interface EmployeeService {
   Boolean deleteEmployee(Integer empNo);
 
   Boolean addEmployee(Employee emp);
+
+  Boolean addEmployee(Employee emp, Boolean isTest);
 }

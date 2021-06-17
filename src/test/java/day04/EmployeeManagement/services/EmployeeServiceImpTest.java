@@ -17,20 +17,18 @@ import day04.EmployeeManagement.models.Employee;
 public class EmployeeServiceImpTest {
   private static EmployeeService svc = null;
   private static Employee emp = null;
+  private static Integer testRecordId = 9999;
 
   @BeforeAll
   public static void init() {
-    emp = new Employee(999, "Lisa", 15000.0, new Address("Los Angeles", "California"));
+    emp = new Employee(testRecordId, "Lisa", 15000.0, new Address("Los Angeles", "California"));
     svc = new EmployeeServiceImpl();
-    svc.addEmployee(emp);
+    svc.addEmployee(emp, true);
   }
 
   @AfterAll
   public static void tear() {
-    try {
-      svc.deleteEmployee(svc.findByEmployeeNo(999));
-    } catch (Exception e) {
-    }
+    svc.deleteEmployee(testRecordId);
   }
 
   @Test
@@ -41,36 +39,34 @@ public class EmployeeServiceImpTest {
   @Test
   void testFindByEmployeeNo() {
     assertDoesNotThrow(() -> {
-      assertEquals(emp, svc.findByEmployeeNo(999));
+      assertEquals(emp.getEmpNo(), svc.findByEmployeeNo(testRecordId).getEmpNo());
     });
     assertThrows(EmployeeNotFound.class, () -> {
-      svc.findByEmployeeNo(9999);
+      svc.findByEmployeeNo(99999);
     });
   }
 
   @Test
   void testUpdateEmployee() {
-    svc.updateEmployee(new Employee(999, "Bart", 16666.60, null));
+    svc.updateEmployee(new Employee(testRecordId, "Bart", 16666.60, new Address("Boston", "Massachusett")));
     assertDoesNotThrow(() -> {
-      svc.findByEmployeeNo(999);
-    });
-    assertDoesNotThrow(() -> {
-      assertEquals("Bart", svc.findByEmployeeNo(999).getEmpName());
+      assertEquals("Bart", svc.findByEmployeeNo(testRecordId).getEmpName());
+      assertEquals("Boston", svc.findByEmployeeNo(testRecordId).getAddress().getCity());
     });
   }
 
   @Test
   void testAddRemoveEmployee() {
-    Employee tmp = new Employee(10000, "Lucy", 14999.0, new Address("Los Angeles", "California"));
-    svc.addEmployee(tmp);
+    int testRecordId = 100000;
+    Employee tmp = new Employee(testRecordId, "Lucy", 14999.0, new Address("Los Angeles", "California"));
+    svc.addEmployee(tmp, true);
     assertDoesNotThrow(() -> {
-      assertNotNull(svc.findByEmployeeNo(10000));
+      assertNotNull(svc.findByEmployeeNo(testRecordId));
     });
 
-    svc.deleteEmployee(tmp);
+    svc.deleteEmployee(tmp.getEmpNo());
     assertThrows(EmployeeNotFound.class, () -> {
-      assertNull(svc.findByEmployeeNo(10000));
+      assertNull(svc.findByEmployeeNo(testRecordId));
     });
-
   }
 }
