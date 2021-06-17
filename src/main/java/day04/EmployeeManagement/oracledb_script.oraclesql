@@ -47,5 +47,8 @@ CACHE 20;
 CREATE or REPLACE TRIGGER emp_proj_addr_tb BEFORE
 insert ON emp_proj_addr_tb FOR EACH ROW
 begin
-select emp_proj_addr_tb_SEQ.nextval into:New.addrId from dual;
+  -- only increment when when id is null
+  if :New.addrId is null THEN
+    select emp_proj_addr_tb_SEQ.nextval into:New.addrId from dual;
+  end if;
 end;

@@ -79,8 +79,43 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public void updateEmployee(Employee e1) {
+  public Boolean updateEmployee(Employee emp) {
     logger.info("Updating employee...");
+    int row;
+    String QUERY1 = "UPDATE emp_proj_emp_tb SET empName=?, salary=? WHERE empNo=?";
+    String QUERY2 = "UPDATE emp_proj_addr_tb SET city=?, state=? WHERE empNo=?";
+    try (Connection conn = ConnectionUtil.getConnection();
+        PreparedStatement stmt1 = conn.prepareStatement(QUERY1);
+        PreparedStatement stmt2 = conn.prepareStatement(QUERY2)) {
+      stmt1.setString(1, emp.getEmpName());
+      stmt1.setDouble(2, emp.getSalary());
+      stmt1.setDouble(3, emp.getEmpNo());
+      row = stmt1.executeUpdate();
+      if (row > 0) {
+        stmt2.setString(1, emp.getAddress().getCity());
+        stmt2.setString(2, emp.getAddress().getState());
+        stmt2.setInt(3, emp.getEmpNo());
+        row = stmt2.executeUpdate();
+        if (row > 0) {
+          return true;
+        } else {
+          String QUERY3 = "insert into emp_proj_addr_tb values(null,?,?,?)";
+          PreparedStatement stmt3 = conn.prepareStatement(QUERY3);
+          stmt3.setInt(1, emp.getEmpNo());
+          stmt3.setString(2, emp.getAddress().getCity());
+          stmt3.setString(3, emp.getAddress().getState());
+          row = stmt3.executeUpdate();
+          stmt3.close();
+          if (row > 0) {
+            return true;
+          }
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("Row cannot be updated");
+    }
+    return false;
   }
 
   @Override

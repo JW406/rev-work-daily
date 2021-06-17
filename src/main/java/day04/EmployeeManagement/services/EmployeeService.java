@@ -12,7 +12,7 @@ public interface EmployeeService {
 
   Employee findByEmployeeNo(int empNo) throws EmployeeNotFound;
 
-  void updateEmployee(Employee emp);
+  Boolean updateEmployee(Employee emp);
 
   Boolean deleteEmployee(Integer empNo);
 
