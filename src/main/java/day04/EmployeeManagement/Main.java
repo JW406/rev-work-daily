@@ -4,16 +4,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import day04.EmployeeManagement.exceptions.EmployeeNotFound;
-import day04.EmployeeManagement.exceptions.InvalidDisplayerName;
-import day04.EmployeeManagement.menuOptions.getDisplayer;
+import day04.EmployeeManagement.menuOptions.Displayer;
 import day04.EmployeeManagement.services.EmployeeService;
 import day04.EmployeeManagement.services.EmployeeServiceImpl;
 import day04.EmployeeManagement.utils.g;
 
-public class UserEmployee {
-  private static final Logger logger = Logger.getLogger(UserEmployee.class.getName());
+public class Main {
+  private static final Logger logger = Logger.getLogger(Main.class.getName());
 
-  public static void main(String[] args) throws InvalidDisplayerName {
+  public static void main(String[] args) {
     EmployeeService svc = new EmployeeServiceImpl();
 
     while (true) {
@@ -29,22 +28,22 @@ public class UserEmployee {
       try {
         switch (g.getNextInt()) {
         case 0:
-          getDisplayer.get("AddEmp").display(svc);
+          Displayer.get("AddEmp").display(svc);
           break;
         case 1:
-          getDisplayer.get("ListEmps").display(svc);
+          Displayer.get("ListEmps").display(svc);
           break;
         case 2:
-          getDisplayer.get("DisplayYearlySal").display(svc);
+          Displayer.get("DisplayYearlySal").display(svc);
           break;
         case 3:
-          getDisplayer.get("DisplayAnEmployee").display(svc);
+          Displayer.get("DisplayAnEmployee").display(svc);
           break;
         case 4:
-          getDisplayer.get("ModifyAnEmployee").display(svc);
+          Displayer.get("ModifyAnEmployee").display(svc);
           break;
         case 5:
-          getDisplayer.get("DeleteAnEmployee").display(svc);
+          Displayer.get("DeleteAnEmployee").display(svc);
           break;
         case 6:
           g.Exit();
