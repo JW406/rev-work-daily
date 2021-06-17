@@ -4,6 +4,9 @@ public class Person {
   private Integer empNo;
   private String empName;
 
+  public Person() {
+  }
+
   public Person(Integer empNo, String empName) {
     this.empNo = empNo;
     this.empName = empName;

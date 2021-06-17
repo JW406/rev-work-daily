@@ -4,6 +4,9 @@ public class Employee extends Person {
   private Double salary;
   private Address address;
 
+  public Employee() {
+  }
+
   public Employee(Integer empNo, String empName, Double salary, Address address) {
     super(empNo, empName);
     this.salary = salary;
