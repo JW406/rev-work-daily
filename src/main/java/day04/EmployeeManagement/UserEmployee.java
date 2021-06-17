@@ -1,7 +1,6 @@
 package day04.EmployeeManagement;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,7 +53,11 @@ public class UserEmployee {
         }
         case 1: { // List all employee
           List<Employee> emps = svc.getAllEmployees();
-          emps.stream().forEach(System.out::println);
+          if (emps.isEmpty()) {
+            logger.log(Level.INFO, "Currently, there is no employee in the database.");
+          } else {
+            emps.stream().forEach(System.out::println);
+          }
           break;
         }
         case 2: { // Display Yearly Salary
