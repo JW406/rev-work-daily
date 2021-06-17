@@ -24,7 +24,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   public List<Employee> getAllEmployees() {
     logger.info("getting all employees...");
-    String QUERY = "select a.empNo, empName, salary, city, state from emp_proj_emp_tb a left join emp_proj_addr_tb b on a.empNo = b.empNo";
+    String QUERY = "select a.empNo, empName, salary, city, state"
+        + " from emp_proj_emp_tb a left join emp_proj_addr_tb b" //
+        + " on a.empNo = b.empNo order by empName";
     List<Employee> res = new ArrayList<>();
     try (Connection con = ConnectionUtil.getConnection();
         Statement stmt = con.createStatement();
