@@ -2,11 +2,20 @@ SELECT TABLE_NAME FROM user_tables;
 
 DROP TABLE emp_proj_emp_tb;
 DROP TABLE emp_proj_addr_tb;
+SELECT * from emp_proj_emp_tb;
+SELECT * from emp_proj_addr_tb;
+TRUNCATE TABLE emp_proj_addr_tb;
+
+ALTER TABLE emp_proj_addr_tb
+DISABLE CONSTRAINT emp_proj_tb_addr_empId_fk;
+TRUNCATE TABLE emp_proj_emp_tb CASCADE;
+ALTER TABLE emp_proj_addr_tb
+ENABLE CONSTRAINT emp_proj_tb_addr_empId_fk;
 
 CREATE TABLE emp_proj_emp_tb (
-  salary NUMBER,
   empNo NUMBER,
-  empName VARCHAR2(30)
+  empName VARCHAR2(30),
+  salary NUMBER
 );
 
 ALTER TABLE emp_proj_emp_tb
@@ -20,5 +29,22 @@ CREATE TABLE emp_proj_addr_tb (
 );
 
 ALTER TABLE emp_proj_addr_tb
+ADD CONSTRAINT emp_proj_addr_tb_addrId_pk PRIMARY KEY(addrId);
+
+ALTER TABLE emp_proj_addr_tb
 ADD CONSTRAINT emp_proj_tb_addr_empId_fk FOREIGN KEY(empNo)
 REFERENCES emp_proj_emp_tb(empNo);
+
+-- Auto-increment id for addr table
+CREATE SEQUENCE emp_proj_addr_tb_SEQ
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20;
+
+CREATE or REPLACE TRIGGER emp_proj_addr_tb BEFORE
+insert ON emp_proj_addr_tb FOR EACH ROW
+begin
+select emp_proj_addr_tb_SEQ.nextval into:New.addrId from dual;
+end;

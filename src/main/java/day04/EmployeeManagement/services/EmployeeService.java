@@ -6,13 +6,13 @@ import day04.EmployeeManagement.models.Employee;
 public interface EmployeeService {
   void displayAllEmployees();
 
-  double calculateYearlySalary(Employee e1);
+  double calculateYearlySalary(Employee emp);
 
   Employee findByEmployeeNo(int empNo) throws EmployeeNotFound;
 
-  void updateEmployee(Employee e1);
+  void updateEmployee(Employee emp);
 
-  void deleteEmployee(Employee e1);
+  void deleteEmployee(Employee emp);
 
-  void addEmployee(Employee e1);
+  Boolean addEmployee(Employee emp);
 }

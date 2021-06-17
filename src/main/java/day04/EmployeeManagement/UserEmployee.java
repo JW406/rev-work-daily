@@ -31,20 +31,24 @@ public class UserEmployee {
       try {
         switch (g.getNextInt()) {
         case 0: { // Add an Employee
-          System.out.println("Enter a ID for the new Employee");
           Employee emp = new Employee();
+          System.out.println("Enter a ID for the new Employee");
           emp.setEmpNo(g.getNextInt());
-          System.out.println("Enter a name for the new Employee");
+          System.out.println("Enter the Name for the new Employee");
           emp.setEmpName(g.getNextString());
-          System.out.println("Enter a salary for the new Employee");
+          System.out.println("Enter the Salary for the new Employee");
           emp.setSalary(g.getNextDouble());
           Address addr = new Address();
-          System.out.println("Enter a State for the new Employee");
+          System.out.println("Enter the State for the new Employee");
           addr.setState(g.getNextString());
-          System.out.println("Enter a City for the new Employee");
+          System.out.println("Enter the City for the new Employee");
           addr.setCity(g.getNextString());
           emp.setAddress(addr);
-          svc.addEmployee(emp);
+          if (svc.addEmployee(emp)) {
+            logger.log(Level.INFO, "Add employee success");
+          } else {
+            logger.log(Level.INFO, "Add employee failed");
+          }
           break;
         }
         case 1: // List all employee

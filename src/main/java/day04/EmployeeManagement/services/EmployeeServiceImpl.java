@@ -1,10 +1,14 @@
 package day04.EmployeeManagement.services;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import daoPatternExercise.ConnectionUtil;
 import day04.EmployeeManagement.exceptions.EmployeeNotFound;
 import day04.EmployeeManagement.models.Address;
 import day04.EmployeeManagement.models.Employee;
@@ -60,8 +64,30 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public void addEmployee(Employee e1) {
+  public Boolean addEmployee(Employee emp) {
     logger.info("Adding employee...");
-    EmployeeServiceImpl.emps.add(e1);
+    String QUERY = "insert into emp_proj_emp_tb values(?,?,?)";
+    String QUERY2 = "insert into emp_proj_addr_tb values(null,?,?,?)";
+    int result;
+    try (Connection con = ConnectionUtil.getConnection();
+        PreparedStatement stmt = con.prepareStatement(QUERY);
+        PreparedStatement stmt2 = con.prepareStatement(QUERY2)) {
+      stmt.setInt(1, emp.getEmpNo());
+      stmt.setString(2, emp.getEmpName());
+      stmt.setDouble(3, emp.getSalary());
+      result = stmt.executeUpdate();
+      if (result > 0) {
+        stmt2.setInt(1, emp.getEmpNo());
+        stmt2.setString(2, emp.getAddress().getCity());
+        stmt2.setString(3, emp.getAddress().getState());
+        result = stmt2.executeUpdate();
+        if (result > 0) {
+          return true;
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return false;
   }
 }
