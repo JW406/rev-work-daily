@@ -1,0 +1,24 @@
+SELECT TABLE_NAME FROM user_tables;
+
+DROP TABLE emp_proj_emp_tb;
+DROP TABLE emp_proj_addr_tb;
+
+CREATE TABLE emp_proj_emp_tb (
+  salary NUMBER,
+  empNo NUMBER,
+  empName VARCHAR2(30)
+);
+
+ALTER TABLE emp_proj_emp_tb
+ADD CONSTRAINT emp_proj_tb_empNo_pk PRIMARY KEY(empNo);
+
+CREATE TABLE emp_proj_addr_tb (
+  addrId NUMBER,
+  empNo NUMBER,
+  city VARCHAR2(20),
+  state VARCHAR2(20)
+);
+
+ALTER TABLE emp_proj_addr_tb
+ADD CONSTRAINT emp_proj_tb_addr_empId_fk FOREIGN KEY(empNo)
+REFERENCES emp_proj_emp_tb(empNo);
