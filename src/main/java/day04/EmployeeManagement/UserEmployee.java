@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import day04.EmployeeManagement.exceptions.EmployeeNotFound;
+import day04.EmployeeManagement.models.Address;
 import day04.EmployeeManagement.models.Employee;
 import day04.EmployeeManagement.services.EmployeeService;
 import day04.EmployeeManagement.services.EmployeeServiceImpl;
@@ -19,6 +20,7 @@ public class UserEmployee {
     boolean flag = true;
     while (flag) {
       System.out.println();
+      System.out.println("0. Add an employee");
       System.out.println("1. List all employee");
       System.out.println("2. Display Yearly Salary");
       System.out.println("3. Display Specific Employee Detail");
@@ -28,6 +30,23 @@ public class UserEmployee {
       System.out.println();
       try {
         switch (g.getNextInt()) {
+        case 0: { // Add an Employee
+          System.out.println("Enter a ID for the new Employee");
+          Employee emp = new Employee();
+          emp.setEmpNo(g.getNextInt());
+          System.out.println("Enter a name for the new Employee");
+          emp.setEmpName(g.getNextString());
+          System.out.println("Enter a salary for the new Employee");
+          emp.setSalary(g.getNextDouble());
+          Address addr = new Address();
+          System.out.println("Enter a State for the new Employee");
+          addr.setState(g.getNextString());
+          System.out.println("Enter a City for the new Employee");
+          addr.setCity(g.getNextString());
+          emp.setAddress(addr);
+          svc.addEmployee(emp);
+          break;
+        }
         case 1: // List all employee
           svc.displayAllEmployees();
           break;
