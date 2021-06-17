@@ -36,14 +36,14 @@ public class UserEmployee {
           System.out.println("Enter a ID for the new Employee");
           emp.setEmpNo(g.getNextInt());
           System.out.println("Enter the Name for the new Employee");
-          emp.setEmpName(g.getNextString());
+          emp.setEmpName(g.getNextString(false));
           System.out.println("Enter the Salary for the new Employee");
           emp.setSalary(g.getNextDouble());
           Address addr = new Address();
           System.out.println("Enter the State for the new Employee");
-          addr.setState(g.getNextString());
+          addr.setState(g.getNextString(false));
           System.out.println("Enter the City for the new Employee");
-          addr.setCity(g.getNextString());
+          addr.setCity(g.getNextString(false));
           emp.setAddress(addr);
           if (svc.addEmployee(emp)) {
             logger.log(Level.INFO, "Add employee success");
@@ -83,32 +83,35 @@ public class UserEmployee {
           double num;
 
           System.out.println("Enter new name (" + modifiedEmp.getEmpName() + ")");
-          str = g.sc.nextLine();
+          str = g.getNextString(true);
           if (!str.isEmpty()) {
             modifiedEmp.setEmpName(str);
           }
 
           System.out.println("Enter new salary (" + modifiedEmp.getSalary() + ")");
-          str = g.sc.nextLine();
+          str = g.getNextString(true);
           if (!str.isEmpty()) {
             num = Double.parseDouble(str);
             modifiedEmp.setSalary(num);
           }
 
           System.out.println("Enter new Address(State) (" + modifiedEmp.getAddress().getState() + ")");
-          str = g.sc.nextLine();
+          str = g.getNextString(true);
           if (!str.isEmpty()) {
             modifiedEmp.getAddress().setState(str);
           }
 
           System.out.println("Enter new Address(City) (" + modifiedEmp.getAddress().getCity() + ")");
-          str = g.sc.nextLine();
+          str = g.getNextString(true);
           if (!str.isEmpty()) {
             modifiedEmp.getAddress().setCity(str);
           }
 
-          svc.updateEmployee(modifiedEmp);
-          System.out.println("\nUpdate " + modifiedEmp.getEmpName() + "(" + id + ") successful\n");
+          if (svc.updateEmployee(modifiedEmp)) {
+            logger.log(Level.INFO, "Update " + modifiedEmp.getEmpName() + "(" + id + ") successful");
+          } else {
+            logger.log(Level.INFO, "Update " + modifiedEmp.getEmpName() + "(" + id + ") failed");
+          }
           break;
         }
         case 5: { // Delete an Employee
@@ -127,8 +130,6 @@ public class UserEmployee {
           g.Exit();
           break;
         }
-      } catch (NoSuchElementException e) {
-        g.Exit();
       } catch (EmployeeNotFound e) {
         logger.log(Level.INFO, "Unable to find the employee");
       }

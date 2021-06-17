@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class g {
-  public static Scanner sc = new Scanner(System.in);
+  private static Scanner sc = new Scanner(System.in);
 
   public static int getNextInt() {
     int res = -1;
@@ -24,12 +24,12 @@ public class g {
     return res;
   }
 
-  public static String getNextString() {
+  public static String getNextString(Boolean allowEmpty) {
     String res = "";
     while (true) {
       try {
         res = sc.nextLine().trim();
-        if (!res.equals("")) {
+        if (allowEmpty || !res.equals("")) {
           break;
         }
       } catch (NoSuchElementException e) {
