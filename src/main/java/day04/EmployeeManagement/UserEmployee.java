@@ -1,5 +1,6 @@
 package day04.EmployeeManagement;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,9 +52,11 @@ public class UserEmployee {
           }
           break;
         }
-        case 1: // List all employee
-          svc.displayAllEmployees();
+        case 1: { // List all employee
+          List<Employee> emps = svc.getAllEmployees();
+          emps.stream().forEach(System.out::println);
           break;
+        }
         case 2: { // Display Yearly Salary
           System.out.println("== Display Yearly Salary ==");
           System.out.println("Enter an employee id:");
@@ -112,9 +115,11 @@ public class UserEmployee {
           System.out.println("== Delete an Employee ==");
           System.out.println("Enter an employee id:");
           int id = g.getNextInt();
-          Employee e1 = svc.findByEmployeeNo(id);
-          svc.deleteEmployee(e1);
-          System.out.println("\nDelete " + e1.getEmpName() + "(" + id + ") successful\n");
+          if (svc.deleteEmployee(id)) {
+            logger.log(Level.INFO, "Delete " + id + " successful");
+          } else {
+            logger.log(Level.INFO, "Delete " + id + " failed");
+          }
           break;
         }
         case 6:

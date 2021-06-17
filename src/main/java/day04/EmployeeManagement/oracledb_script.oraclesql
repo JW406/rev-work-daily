@@ -33,9 +33,10 @@ ADD CONSTRAINT emp_proj_addr_tb_addrId_pk PRIMARY KEY(addrId);
 
 ALTER TABLE emp_proj_addr_tb
 ADD CONSTRAINT emp_proj_tb_addr_empId_fk FOREIGN KEY(empNo)
-REFERENCES emp_proj_emp_tb(empNo);
+REFERENCES emp_proj_emp_tb(empNo) ON DELETE CASCADE;
 
 -- Auto-increment id for addr table
+DROP SEQUENCE emp_proj_addr_tb_SEQ;
 CREATE SEQUENCE emp_proj_addr_tb_SEQ
 INCREMENT BY 1
 START WITH 1
