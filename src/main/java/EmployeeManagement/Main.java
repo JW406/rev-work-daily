@@ -39,6 +39,8 @@ public class Main {
         int sel = g.getNextInt();
         if (sel < UIMap.size()) {
           ((Displayer) UIMap.get(sel)[1]).display(svc);
+          System.out.println("\nPress Enter to Continue...");
+          g.getNextString(true);
         } else if (sel == UIMap.size()) {
           break;
         }
