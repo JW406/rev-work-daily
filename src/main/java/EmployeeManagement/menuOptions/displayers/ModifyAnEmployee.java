@@ -8,7 +8,7 @@ import EmployeeManagement.models.Employee;
 import EmployeeManagement.services.EmployeeService;
 import EmployeeManagement.utils.g;
 
-final public class ModifyAnEmployee implements Displayer {
+final public class ModifyAnEmployee extends Displayer {
   private final static ModifyAnEmployee instance = new ModifyAnEmployee();
 
   public static ModifyAnEmployee getInstance() {

@@ -6,7 +6,7 @@ import EmployeeManagement.models.Employee;
 import EmployeeManagement.services.EmployeeService;
 import EmployeeManagement.utils.g;
 
-final public class DisplayYearlySal implements Displayer {
+final public class DisplayYearlySal extends Displayer {
   private final static DisplayYearlySal instance = new DisplayYearlySal();
 
   public static DisplayYearlySal getInstance() {

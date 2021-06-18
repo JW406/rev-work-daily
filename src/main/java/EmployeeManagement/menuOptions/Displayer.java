@@ -7,9 +7,9 @@ import EmployeeManagement.exceptions.EmployeeNotFound;
 import EmployeeManagement.services.EmployeeService;
 import EmployeeManagement.utils.g;
 
-public interface Displayer {
-  Logger logger = Logger.getLogger(Displayer.class.getName());
-  final public static String prefix = "EmployeeManagement.menuOptions.displayers.";
+public abstract class Displayer {
+  protected static Logger logger = Logger.getLogger(Displayer.class.getName());
+  final private static String prefix = "EmployeeManagement.menuOptions.displayers.";
 
   public static Displayer get(String str) {
     try {
@@ -22,5 +22,5 @@ public interface Displayer {
     }
   }
 
-  void display(EmployeeService svc) throws EmployeeNotFound;
+  abstract public void display(EmployeeService svc) throws EmployeeNotFound;
 }

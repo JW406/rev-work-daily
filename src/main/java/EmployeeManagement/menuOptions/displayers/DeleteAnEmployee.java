@@ -6,7 +6,7 @@ import EmployeeManagement.menuOptions.Displayer;
 import EmployeeManagement.services.EmployeeService;
 import EmployeeManagement.utils.g;
 
-final public class DeleteAnEmployee implements Displayer {
+final public class DeleteAnEmployee extends Displayer {
   private final static DeleteAnEmployee instance = new DeleteAnEmployee();
 
   public static DeleteAnEmployee getInstance() {

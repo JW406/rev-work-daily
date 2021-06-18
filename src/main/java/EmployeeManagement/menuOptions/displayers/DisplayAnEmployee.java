@@ -6,7 +6,7 @@ import EmployeeManagement.models.Employee;
 import EmployeeManagement.services.EmployeeService;
 import EmployeeManagement.utils.g;
 
-final public class DisplayAnEmployee implements Displayer {
+final public class DisplayAnEmployee extends Displayer {
   private final static DisplayAnEmployee instance = new DisplayAnEmployee();
 
   public static DisplayAnEmployee getInstance() {

@@ -7,7 +7,7 @@ import EmployeeManagement.menuOptions.Displayer;
 import EmployeeManagement.models.Employee;
 import EmployeeManagement.services.EmployeeService;
 
-final public class ListEmps implements Displayer {
+final public class ListEmps extends Displayer {
   private final static ListEmps instance = new ListEmps();
 
   public static ListEmps getInstance() {
