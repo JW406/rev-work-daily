@@ -1,5 +1,8 @@
 package EmployeeManagement;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,44 +17,35 @@ public class Main {
 
   public static void main(String[] args) {
     EmployeeService svc = new EmployeeServiceImpl();
+    Map<Integer, Object[]> UIMap = new TreeMap<Integer, Object[]>() {
+      {
+        put(0, new Object[] { "0. Add an employee", Displayer.get("AddEmp") });
+        put(1, new Object[] { "1. List all employee", Displayer.get("ListEmps") });
+        put(2, new Object[] { "2. Display Yearly Salary", Displayer.get("DisplayYearlySal") });
+        put(3, new Object[] { "3. Display Specific Employee Detail", Displayer.get("DisplayAnEmployee") });
+        put(4, new Object[] { "4. Modify Employee Detail", Displayer.get("ModifyAnEmployee") });
+        put(5, new Object[] { "5. Delete an Employee", Displayer.get("DeleteAnEmployee") });
+      }
+    };
 
     while (true) {
       System.out.println();
-      System.out.println("0. Add an employee");
-      System.out.println("1. List all employee");
-      System.out.println("2. Display Yearly Salary");
-      System.out.println("3. Display Specific Employee Detail");
-      System.out.println("4. Modify Employee Detail");
-      System.out.println("5. Delete an Employee");
+      for (Entry<Integer, Object[]> e : UIMap.entrySet()) {
+        System.out.println(e.getValue()[0]);
+      }
       System.out.println("6. Quit");
       System.out.println();
       try {
-        switch (g.getNextInt()) {
-        case 0:
-          Displayer.get("AddEmp").display(svc);
-          break;
-        case 1:
-          Displayer.get("ListEmps").display(svc);
-          break;
-        case 2:
-          Displayer.get("DisplayYearlySal").display(svc);
-          break;
-        case 3:
-          Displayer.get("DisplayAnEmployee").display(svc);
-          break;
-        case 4:
-          Displayer.get("ModifyAnEmployee").display(svc);
-          break;
-        case 5:
-          Displayer.get("DeleteAnEmployee").display(svc);
-          break;
-        case 6:
-          g.Exit();
+        int sel = g.getNextInt();
+        if (sel < UIMap.size()) {
+          ((Displayer) UIMap.get(sel)[1]).display(svc);
+        } else if (sel == UIMap.size()) {
           break;
         }
       } catch (EmployeeNotFound e) {
         logger.log(Level.INFO, "Unable to find the employee");
       }
     }
+    g.Exit();
   }
 }

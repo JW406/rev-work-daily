@@ -12,8 +12,8 @@ public class DBConnection {
   public static Connection getConnection() {
     Properties props = new Properties();
     Connection con = null;
-    try {
-      props.load(new FileInputStream("db.properties"));
+    try (FileInputStream dbProps = new FileInputStream("db.properties")) {
+      props.load(dbProps);
       Class.forName(props.getProperty("DB_DRIVER_CLASS"));
 
       con = DriverManager.getConnection(props.getProperty("DB_URL"), props.getProperty("DB_USERNAME"),
